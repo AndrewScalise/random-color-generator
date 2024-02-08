@@ -4,37 +4,29 @@ const RandomColor = () => {
   const [type, setType] = useState("hex");
   const [color, setColor] = useState("#ffffff");
 
+  const random255 = () => Math.floor(Math.random() * 255);
+  const randomHex = () =>
+    `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
   const handleChangeColor = () => {
+    let color;
     switch (type) {
       case "hex":
-        const randomHexColor = `#${Math.floor(
-          Math.random() * 16777215
-        ).toString(16)}`;
-        setColor(randomHexColor);
+        color = randomHex();
         break;
       case "rgb":
-        const randomRGBColor = `rgb(${Math.floor(
-          Math.random() * 255
-        )}, ${Math.floor(Math.random() * 255)}, ${Math.floor(
-          Math.random() * 255
-        )})`;
-        setColor(randomRGBColor);
+        color = `rgb(${random255()}, ${random255()}, ${random255()})`;
         break;
       case "rgba":
-        const randomRGBAColor = `rgba(${Math.floor(
-          Math.random() * 255
-        )}, ${Math.floor(Math.random() * 255)}, ${Math.floor(
-          Math.random() * 255
-        )}, ${Math.random().toFixed(1)})`;
-        setColor(randomRGBAColor);
+        color = `rgba(${random255()}, ${random255()}, ${random255()}, ${Math.random().toFixed(
+          1
+        )})`;
         break;
       default:
-        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
-          16
-        )}`;
-        setColor(randomColor);
+        color = randomHex();
         break;
     }
+    setColor(color);
   };
 
   return (
@@ -59,7 +51,7 @@ const RandomColor = () => {
         <option value="rgb">RGB</option>
         <option value="rgba">RGBA</option>
       </select>
-        <button onClick={handleChangeColor}>Random Color</button>
+      <button onClick={handleChangeColor}>Random Color</button>
     </div>
   );
 };
